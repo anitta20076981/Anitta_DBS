@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+
+    <!-- Parent DOM toggle card -->
+    <div id="parent-card" style="
+  width: 220px;
+  height: 100px;
+  background-color: #87cefa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  font-family: Arial;
+  cursor: pointer;
+  margin-bottom: 15px;
+  text-align: center;
+">
+        Parent Card: OFF
+    </div>
+
+    <!-- Shadow DOM toggle card -->
+    <shadow-toggle-card></shadow-toggle-card>
+
+    <script>
+        // Parent DOM toggle behavior
+        const parentCard = document.querySelector('#parent-card');
+        parentCard.addEventListener('click', () => {
+            if (parentCard.textContent.includes('OFF')) {
+                parentCard.textContent = 'Parent Card: ON';
+                parentCard.style.backgroundColor = '#32cd32';
+                parentCard.style.color = 'white';
+            } else {
+                parentCard.textContent = 'Parent Card: OFF';
+                parentCard.style.backgroundColor = '#87cefa';
+                parentCard.style.color = 'black';
+            }
+        });
+
+        // Shadow DOM toggle card
+        class ShadowToggleCard extends HTMLElement {
+            constructor() {
+                super();
+                this.attachShadow({
+                    mode: 'open'
+                });
+                this.shadowRoot.innerHTML = `
+        <style>
+          #card {
+            width: 220px;
+            height: 100px;
+            background-color: #ff7f7f;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            font-family: Arial;
+            cursor: pointer;
+            color: white;
+            transition: 0.3s;
+            text-align: center;
+          }
+        </style>
+        <div id="card">Shadow Card: OFF</div>
+      `;
+
+                const card = this.shadowRoot.querySelector('#card');
+                card.addEventListener('click', () => {
+                    if (card.textContent.includes('OFF')) {
+                        card.textContent = 'Shadow Card: ON';
+                        card.style.backgroundColor = '#228b22';
+                    } else {
+                        card.textContent = 'Shadow Card: OFF';
+                        card.style.backgroundColor = '#ff7f7f';
+                    }
+                });
+            }
+        }
+
+        customElements.define('shadow-toggle-card', ShadowToggleCard);
+    </script>
+
+</body>
+
+</html>
