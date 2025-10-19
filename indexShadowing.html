@@ -3,7 +3,7 @@
 
 <body>
 
-    <!-- Parent DOM toggle card -->
+
     <div id="parent-card" style="
   width: 220px;
   height: 100px;
@@ -20,11 +20,10 @@
         Click Me
     </div>
 
-    <!-- Shadow DOM toggle card -->
+
     <shadow-toggle-card></shadow-toggle-card>
 
     <script>
-        // Parent DOM toggle behavior
         const parentCard = document.querySelector('#parent-card');
         parentCard.addEventListener('click', () => {
             if (parentCard.textContent.includes('Hello')) {
@@ -38,7 +37,7 @@
             }
         });
 
-        // Shadow DOM toggle card
+
         class ShadowToggleCard extends HTMLElement {
             constructor() {
                 super();
